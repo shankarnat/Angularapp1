@@ -1,0 +1,115 @@
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+<mat-icon>home</mat-icon> <br>
+<button mat-raised-button>I'm a button</button> <br>
+<mat-checkbox>Check me!</mat-checkbox>
+<br><br>
+
+<h1>{{name}}</h1>
+<ul>
+<li>
+  Age: {{age}}
+</li>
+<li>  Email: {{email}}</li>
+<li>{{address.street}} {{address.city}}, {{address.state}}</li>
+</ul>
+<button mat-raised-button (click)="onClick()">Click Me</button> <br>
+<button mat-raised-button (click)="toggleEdit()">Edit User</button>
+
+<div *ngIf = isEdit>
+<h1>Edit User</h1>
+<form>
+<div>
+  <label for="name">Name :</label><br>
+  <input type="text" [(ngModel)] ="name" name="name">
+</div>
+<div>
+  <label for="age">Age :</label><br>
+  <input type="number" [(ngModel)] ="age" name="age">
+</div>
+<div>
+  <label for="email">Email :</label><br>
+  <input type="text"  [(ngModel)] ="email" name="email">
+</div>
+<div>
+  <label for="street">Street :</label><br>
+  <input type="text" [(ngModel)] ="address.street" name="street">
+</div>
+<div>
+  <label for="city">City :</label><br>
+  <input type="text" [(ngModel)] ="address.city" name="city">
+</div>
+<div>
+  <label for="state">State :</label><br>
+  <input type="text" [(ngModel)] ="address.state" name="state">
+</div>
+
+</form>
+</div>
+<br>
+
+<form (submit)="addHobby(hobby.value)">
+  <div><label for="hobby">Hobby :</label><br>
+  <input type='text' #hobby></div>
+</form>
+
+
+<h1>Hobbies</h1>
+<ul>
+  <li *ngFor="let hobby of hobbies; let i = index">{{i}}:{{hobby}}</li>
+</ul>
+
+<h1>Chunks</h1>
+<div *ngFor='let chunk of chunk_info'>
+  <h4>{{chunk.version}}</h4>
+  <h4>{{chunk.user_ref_name}}</h4>
+  <div *ngFor='let steps_name of chunk.step_status'>
+    {{steps_name.step_name}}
+  </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="version">
+    <th mat-header-cell *matHeaderCellDef> Version </th>
+    <td mat-cell *matCellDef="let element"> {{element.version}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="user_ref_name">
+    <th mat-header-cell *matHeaderCellDef> User Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.user_ref_name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="start_date">
+    <th mat-header-cell *matHeaderCellDef> Start Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.start_date}} </td>
+  </ng-container>
+
+   <!-- Weight Column -->
+   <ng-container matColumnDef="end_date">
+    <th mat-header-cell *matHeaderCellDef> End Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.end_date}} </td>
+  </ng-container>
+  <ng-container matColumnDef="step_status">
+    <th mat-header-cell *matHeaderCellDef> Step Status</th>
+    <td mat-cell *matCellDef="let element"> {{element.step_status}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<h1>Posts</h1>
+<div *ngFor='let post of posts'>
+  <h4>{{post.title}}</h4>
+  <p>{{post.body}}</p>
+</div>
