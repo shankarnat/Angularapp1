@@ -89,7 +89,9 @@ export class UserComponent implements OnInit {
       this.posts = result
       console.log(this.posts)
       },
-
+      error => {
+        console.log("Hello")
+      }
     
   );
     console.log(this.chunks)
